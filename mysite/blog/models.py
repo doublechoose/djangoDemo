@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from taggit.managers import TaggableManager
 
 # Create your models here.
 from django.urls import reverse
@@ -39,6 +40,7 @@ class Post(models.Model):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
+    tags = TaggableManager()
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
@@ -49,7 +51,7 @@ class Post(models.Model):
                            self.slug
                        ])
 
-    # 告诉jango 排序结果，降序
+    # 告诉django 排序结果，降序
     class Meta:
         ordering = ('-publish',)
 
@@ -59,3 +61,28 @@ class Post(models.Model):
     # 提供对象的可读性
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    # 评论的数据模型
+    # 对哪个post的评论
+    # 谁评论
+    # 邮箱
+    # 评论的内容
+    # 创建时间
+    # 更新时间
+    # active 用于屏蔽
+    # related_name 允许我们命名不适当的评论
+    post = models.ForeignKey(Post, related_name='comments',on_delete=models.CASCADE)
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    created = models.DateTimeField(auto_now_add=True)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name,self.post)
