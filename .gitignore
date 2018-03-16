@@ -2,3 +2,9 @@
 .idea/*
 
 *.pyc
+*.sqlite3
+*.iml
+bookmarks/.idea/misc.xml
+bookmarks/.idea/modules.xml
+bookmarks/.idea/vcs.xml
+bookmarks/.idea/workspace.xml
