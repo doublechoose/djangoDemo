@@ -26,6 +26,10 @@ EMAIL_HOST_PASSWORD = 'wzswzs'
 EMAIL_HOST_PORT = 25
 EMAIL_HOST_TLS = True
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,6 +52,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'account',
     'images',
+    'actions',
     'sorl.thumbnail',
     'pictures',
     'django.contrib.admin',
@@ -62,6 +67,11 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 )
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail',
+                                        args=[u.username])
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -8,3 +8,7 @@ bookmarks/.idea/misc.xml
 bookmarks/.idea/modules.xml
 bookmarks/.idea/vcs.xml
 bookmarks/.idea/workspace.xml
+
+*.jpg
+
+*.jpeg

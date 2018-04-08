@@ -1,5 +1,4 @@
 (function(){
-    // 防止多次点击造成多个窗口
     if(window.bookmarklet!==undefined){
         bookmarklet();
     }

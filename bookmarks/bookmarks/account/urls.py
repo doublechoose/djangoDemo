@@ -1,4 +1,4 @@
-from django.urls import path,re_path
+from django.urls import path, re_path
 from . import views
 from django.contrib.auth.views import login, logout, logout_then_login, \
     password_change, password_change_done, password_reset, password_reset_done, \
@@ -20,8 +20,16 @@ urlpatterns = [
     path('password-change/done/', password_change_done, name='password_change_done'),
     path('password-reset', password_reset, name='password_reset'),
     path('password-reset/done/', password_reset_done, name='password_reset_done'),
-    re_path(r'^password-reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$', password_reset_confirm, name='password_reset_confirm'),
+    re_path(r'^password-reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$', password_reset_confirm,
+            name='password_reset_confirm'),
     path('password-reset/complete/', password_reset_complete, name='password_reset_complete'),
+
+    path('users/follow/', views.user_follow, name='user_follow'),
+
+    path('users/', views.user_list, name='user_list'),
+    re_path(r'^users/(?P<username>[-\w]+)/$',
+            views.user_detail,
+            name='user_detail'),
 
 ]
 
